@@ -9,7 +9,7 @@ import { useLocation } from "react-router";
 const Layout = styled.div`
   display: flex;
   margin: 25px;
-  background-color: white;
+  background-color: white;b
   
 `;
 
@@ -54,22 +54,22 @@ class EvaluateGrid extends Component {
     super(props);
     this.state = {
 
-        currentCapacity: props.currentCapacity
+        currentCapacity: props.data
 
     };
     
-  }
- 
-
+  };
+  
   
   render() {
     return (
       <Layout>
         <Left>
           <InputBox>
-            <Label>{this.state.currentCapacity}</Label>
+            <Label>{this.state.currentCapacity} </Label>
             <Label>Current Capacity</Label>
           </InputBox>
+            <Label>Current Capacity</Label>
           <InputBox>
             <Label>Requiered Capacity</Label>
             <Input />
