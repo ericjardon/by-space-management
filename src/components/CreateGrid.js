@@ -145,11 +145,11 @@ console.log(this.state.numberOfTables);
 
     await this.setState({
       currentCapacity: currCapacity,
-      secondTimer: true
+      secondTimer: true,
     })
 
     console.log("current"+ this.state.currentCapacity)
-    this.updupdateCapacityt.current.update();
+    
 }
 
 
@@ -159,7 +159,7 @@ console.log(this.state.numberOfTables);
     return (
       <Layout>
         <Instructions>
-        <Text>The first step is to build a layout that represents how your resataurant looks like</Text>
+        <Text>The first step is to build a layout that represents what your business space looks like</Text>
 
         <Text>Remember that every cell in the grid represents one square meter and that you can simply click on a cell to place a table</Text>
         <Top>
@@ -194,12 +194,25 @@ console.log(this.state.numberOfTables);
         {this.state.timer === false ? (
           <div></div>
         ) : (
-          <Grid gridd={this.state.pops}></Grid>
+          <div>
+            <Grid gridd={this.state.pops}></Grid>
+          </div>
         )}
 
+        <p><br/></p>
         <Middle>
         <ButtonLarge onClick={this.applySocialDistancing}>Calculate Social Distancing</ButtonLarge>
         </Middle>
+
+        
+        {this.state.secondTimer === false ? (
+          <div></div>
+        ) : (
+          <div>
+            <EvaluateGrid data={this.state.currentCapacity}/>
+          </div>
+        )}
+        
   
        
 
