@@ -1,44 +1,66 @@
 import styled from "styled-components";
+import React, { Component } from "react";
+const Title = styled.p`
+  color: white;
 
-export const Title =styled.h1`
-    color: white; 
-    float: left;
-    font-size: 120%;
-    margin-right: 45%;
-`;
-export const Header = styled.div`
-    width: 100%;
-    height: 10%;
-    padding: 5px;
-    background-color: rgba(	44,	44,	52, 1);
-
+  font-size: 25px;
 `;
 
-export const HeaderWrapper= styled.div`
-    display: left;
-    
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const Wrapper = styled.div`
+  width: 100%;
+  height: 75px;
+  padding: 5px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
 `;
 
-export const HeaderItem = styled.a`
-    text-decoration: none;
-    color: white;
-    font-size: 100%;
-    list-style-type: none;
-    float: left;
-    margin-right: 1%;
+const LoginWrapper = styled.div`
+  display: flex;
+  margin: auto 0 auto 0;
 `;
 
-export const HeaderInput = styled.input`
-    height: 25px;
-    width: 12%;
-    margin-right: 3%;
+const Input = styled.input`
+  height: 35px;
+  width: 150px;
+  margin: 10px;
 `;
 
-export const LoginB = styled.button`
-    background-color: rgba(	44,	44,	52, 1);
-    border: 1px solid white;
-    margin-left: 2%;
-    color: white; 
-    padding: 5px;
+const Button = styled.button`
+  background-color: black;
+  height: 45px;
+  width: 100px;
+  border: 1px solid white;
+  color: white;
+  padding: 10px;
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
 `;
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <Wrapper>
+        <LogoWrapper>
+          <Title>Name</Title>
+        </LogoWrapper>
 
+        <LoginWrapper>
+          <Input placeholder="Username" />
+          <Input placeholder="Password" />
+          <Button>Login</Button>
+        </LoginWrapper>
+      </Wrapper>
+    );
+  }
+}
+
+export default Header;
