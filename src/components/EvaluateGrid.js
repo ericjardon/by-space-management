@@ -5,7 +5,7 @@ import SideComponentsCalculated from "./SideComponentsCalculated";
 import CreateGrid from "./CreateGrid";
 
 import styled from "styled-components";
-
+import { useLocation } from "react-router";
 const Layout = styled.div`
   display: flex;
   margin: 25px;
@@ -46,11 +46,13 @@ const InputBox = styled.div`
   justify-content: Space-Between;
   padding: 25px;
 `;
+
 class EvaluateGrid extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
     return (
       <Layout>
@@ -66,7 +68,6 @@ class EvaluateGrid extends Component {
 
           <Button>Apply restrictions</Button>
         </Left>
-        <CreateGrid />
       </Layout>
     );
   }

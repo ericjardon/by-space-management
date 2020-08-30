@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { Component } from "react";
+import React, { Component, useNavigate } from "react";
 import Grid from "./Grid";
+import { Link } from "react-router-dom";
 
 const Layout = styled.div`
 display: flex
@@ -122,7 +123,9 @@ class CreateGrid extends Component {
         )}
         <div>{this.timeGrid}</div>
         <Bottom>
-          <Button>Save layout</Button>
+          <Button>
+            <Link to={"/evaluate"}>Save Layout</Link>
+          </Button>
         </Bottom>
       </Layout>
     );
