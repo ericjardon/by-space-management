@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Row = styled.div`
   display: flex;
   text-align: center;
-  height: 100px;
+  height: 50px;
   justify-content: center;
   border: 0px solid black;
   margin: 1px;
@@ -12,15 +12,28 @@ const Row = styled.div`
 const Cell = styled.div`
   border: 1px solid black;
   margin: 1px;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
 `;
 const Table = styled.div`
+border: 1px solid #ad7657;
   margin: 1px;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   background-color: #ad7657;
 `;
+
+
+
+const DisabledTable = styled.div`
+  text-decoration: line-through black;
+  border: 1px solid #ad7657;
+  margin: 1px;
+  height: 50px;
+  width: 50px;
+  background-color: rgba(173,119,87,0.5);
+`;
+
 class Grid extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +63,7 @@ class Grid extends Component {
 
     console.log(this.state.grid);
   }
+  
 
   render() {
     return (
@@ -57,14 +71,21 @@ class Grid extends Component {
         {this.state.test.map((box, i) => (
           <Row>
             {box.map((cell, j) =>
+   
+
               cell === 0 ? (
                 <Cell onClick={() => this.createTable(i, j)}></Cell>
               ) : (
-                <Table onClick={() => this.createTable(i, j)}>
-                  Mesa {i}-{j}
-                </Table>
-              )
-            )}
+                cell=== 1 ?(
+                  <Table onClick={() => this.createTable(i, j)}>
+                    Mesa {i}-{j}
+                  </Table>
+                ): (<DisabledTable onClick={() => this.createTable(i, j)}>
+                      Mesa {i}-{j}
+                    </DisabledTable>
+                ))
+                
+              )}
           </Row>
         ))}
       </div>
