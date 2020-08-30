@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import SideComponent from "./SideComponent";
 import SideComponentsCalculated from "./SideComponentsCalculated";
 import CreateGrid from "./CreateGrid";
+import QuotaCalculator from "../models/QuotaCalculator";
 
 import styled from "styled-components";
 import { useLocation } from "react-router";
@@ -54,11 +55,20 @@ class EvaluateGrid extends Component {
     super(props);
     this.state = {
 
-        currentCapacity: props.data
+        currentCapacity: props.data,
+        d: props.d,
+        q:0
 
     };
     
   };
+  quotaUse(d,q){
+    let qc = new QuotaCalculator();
+    qc.doEverything(d,q);
+  }
+  leerInput(e){
+    this.setState({q: e.target.value})
+  }
   
   
   render() {
@@ -72,10 +82,10 @@ class EvaluateGrid extends Component {
             <Label>Current Capacity</Label>
           <InputBox>
             <Label>Requiered Capacity</Label>
-            <Input />
+            <Input onChange={this.leerInput} />
           </InputBox>
 
-          <Button onClick={null}>Apply restrictions</Button>
+          <Button onClick={()=>this.quotaUse(this.state.d, parseFloat(this.state.q))}>Apply restrictions</Button>
         </Left>
       </Layout>
     );

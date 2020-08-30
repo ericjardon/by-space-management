@@ -33,7 +33,7 @@ export default class QuotaCalculator{
         } else{
             console.log("Quota achieved!");
         }
-
+        console.log(data);
         return data;
     }
 
