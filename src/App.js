@@ -1,57 +1,21 @@
-import React from 'react';
+import React from "react";
+import styled, { css } from "styled-components";
 
-import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-import {Header,HeaderItem, HeaderInput, LoginB,Title,HeaderWrapper } from './components/Header'
-import CreateGrid from './components/CreateGrid'
-import EvaluateGrid from './components/EvaluateGrid'
-import styled from "styled-components";
+import CreateGrid from "./components/CreateGrid";
+import EvaluateGrid from "./components/EvaluateGrid";
+import Header from "./components/Header";
 
-const Layout= styled.div`
-display: flex;
-
-
+export const Wrapper = styled.div`
+  font-family: system-ui;
 `;
 
 function App() {
   return (
-    <ThemeProvider>
-    <CSSReset />
-    
-    <Header>
-      <Title>Crea tu propio esquema</Title>
-      <HeaderWrapper>
-        <HeaderItem>Login</HeaderItem>
-        <HeaderInput placeholder="User"></HeaderInput>
-        <HeaderInput placeholder="Password"></HeaderInput>
-        <LoginB>Login</LoginB>
-      </HeaderWrapper>
-    </Header>
-
-
-    
-    
-    
-    
-  
-    
-    
-    
-    <CreateGrid/>
-    
-
-    
-  
-    
-    
-
-    
-    
-    </ThemeProvider>
-   
+    <Wrapper>
+      <Header />
+      <EvaluateGrid />
+    </Wrapper>
   );
 }
 
-
-
-
-export default App; 
+export default App;
