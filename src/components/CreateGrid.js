@@ -2,39 +2,47 @@ import styled from "styled-components";
 import React, { Component, useNavigate } from "react";
 import Grid from "./Grid";
 import { Link } from "react-router-dom";
+import EvaluateGrid from "./EvaluateGrid";
+import QuotaCalculator from "../models/QuotaCalculator";
+
 
 const Layout = styled.div`
-display: flex
+display: flex;
+justify-content: space-between;
 flex-direction: column;
-margin: auto;
+
 
 `;
+
+
+
+const RightInputWrapper =styled.div`
+display: flex
+flex-direction: row;
+
+`
 
 const Top = styled.div`
   display: flex;
   justify-content: center;
-`;
-const Row = styled.div`
-  display: flex;
-  text-align: center;
-  height: 100px;
-  justify-content: center;
-  border: 0px solid black;
-  margin: 1px;
+  
 `;
 
-const Cell = styled.div`
-  border: 1px solid black;
-  margin: 1px;
-  height: 100px;
-  width: 100px;
+const Middle = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: white;
 `;
-const Table = styled.div`
-  margin: 1px;
-  height: 100px;
-  width: 100px;
-  background-color: #ad7657;
+
+
+const Instructions =styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+
 `;
+
 export const Button = styled.button`
   background-color: rgba(44, 44, 52, 1);
   border: 1px solid black;
@@ -43,6 +51,16 @@ export const Button = styled.button`
   padding: 5px;
   height: 40px;
   width: 100px;
+`;
+
+export const ButtonLarge = styled.button`
+  background-color: rgba(44, 44, 52, 1);
+  border: 1px solid black;
+  margin: 25px;
+  color: white;
+  padding: 5px;
+  height: 40px;
+  width: 200px;
 `;
 
 export const Input = styled.input`
@@ -57,6 +75,14 @@ const Bottom = styled.div`
   justify-content: center;
 `;
 
+const Text = styled.p`
+text-size:50px;
+text-align: center;
+
+
+`
+
+
 class CreateGrid extends Component {
   constructor(props) {
     super(props);
@@ -65,9 +91,15 @@ class CreateGrid extends Component {
       rows: 2,
       columns: 2,
       timer: false,
+      numberOfTables:10,
+      currentCapacity:100,
+      secondTimer:false,
     };
+    this.updateCapacity = React.createRef()
     this.onChange = this.onChange.bind(this);
     this.createCells = this.createCells.bind(this);
+    this.applySocialDistancing=this.applySocialDistancing.bind(this);
+    
   }
 
   onChange(e, val) {
@@ -94,18 +126,54 @@ class CreateGrid extends Component {
         console.log(this.state.pops);
       }
     );
+
   }
+async applySocialDistancing(){
+  const qc=new QuotaCalculator();
+  let numberOfTables = qc.countTables(this.state.pops); // cuenta mesas antes de inhabilitar
+  console.log(qc.doEverything(this.state.pops, 1.0));
+
+  await this.setState(
+    {
+      pops: qc.doEverything(this.state.pops, 1.0),
+    numberOfTables: numberOfTables
+    });
+console.log(this.state.numberOfTables);
+    // Calculate Current capacity
+    let currCapacity = await qc.calculatePC(qc.countTables(this.state.pops), this.state.numberOfTables);
+    console.log("curr "+currCapacity);
+
+    await this.setState({
+      currentCapacity: currCapacity,
+      secondTimer: true
+    })
+
+    console.log("current"+ this.state.currentCapacity)
+    this.updupdateCapacityt.current.update();
+}
+
+
+
 
   render() {
     return (
       <Layout>
+        <Instructions>
+        <Text>The first step is to build a layout that represents how your resataurant looks like</Text>
+
+        <Text>Remember that every cell in the grid represents one square meter and that you can simply click on a cell to place a table</Text>
         <Top>
+
+          <RightInputWrapper>
+
           <Input
-            onChange={(e) => this.onChange(e, "rows")}
-            placeholder="Rows"
+              onChange={(e) => this.onChange(e, "rows")}
+              type="number"
+              placeholder="Rows"
           ></Input>
           <Input
             onChange={(e) => this.onChange(e, "columns")}
+            type="number"
             placeholder="Columns"
           ></Input>
           <Button
@@ -115,21 +183,29 @@ class CreateGrid extends Component {
           >
             Create Grid
           </Button>
-        </Top>
+            
+          </RightInputWrapper>
+      </Top>
+      </Instructions>
+
+
+
+
         {this.state.timer === false ? (
-          <div>Hola</div>
+          <div></div>
         ) : (
           <Grid gridd={this.state.pops}></Grid>
         )}
-        <div>{this.timeGrid}</div>
-        <Bottom>
-          <Button>
-            <Link to={"/evaluate"}>Save Layout</Link>
-          </Button>
-        </Bottom>
+
+        <Middle>
+        <ButtonLarge onClick={this.applySocialDistancing}>Calculate Social Distancing</ButtonLarge>
+        </Middle>
+  
+       
+
+          
       </Layout>
-    );
+      );
   }
 }
-
 export default CreateGrid;

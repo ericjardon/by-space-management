@@ -2,14 +2,14 @@
 funciones del backend relacionadas con el cálculo de disponibilidad.
  */
 
-class QuotaCalculator{
+export default class QuotaCalculator{
 
     doEverything(data,quota){       // data is a bidimensional array. Quota is a value between 0 and 1
         // Cuenta mesas totales
         const totalTables = this.countTables(data);
         console.log("Total tables: " + totalTables);
 
-        // Crear la Susana Dis
+        // Calcular la Susana Distancia
         this.disableTablesX(data);
         this.disableTablesY(data);
         this.disableTablesDiaIzquierda(data);
@@ -137,46 +137,6 @@ class QuotaCalculator{
 }
         
 
-
- 
-let M1 = [     
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,0,0,0,0,1,1],
-    [0,0,1,1,0,0,0,1,1,0,0],
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,1,0,0,0,1,1],
-]
-let M3 = [     
-    [0,0,1,1,0,1,0,0,0,1,1],
-    [0,0,0,0,0,0,0,0,0,1,1],        // aunque no detecte una mesa de 2x2, sí detecra dos de 2x1 por el criterio diagonal.
-    [0,1,1,1,0,0,0,1,1,0,0],
-    [1,0,0,0,0,1,0,0,0,0,1],
-    [1,0,0,0,1,0,0,0,1,1,1],
-]
-
-let M2 = [
-    [0,0,0,1,1,0,1,0,1,1],
-    [1,1,0,0,1,1,1,0,0,1],
-    [0,0,1,1,0,0,1,0,0,0],
-    [1,0,1,0,1,0,1,0,1,1],
-    [1,0,0,1,1,0,1,1,0,0],
-]
-
-let M4= [    
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,0,0,0,0,1,1],
-    [0,1,1,1,0,0,0,1,1,0,0],
-    [1,0,0,0,0,1,0,0,0,0,1],
-    [1,0,0,0,1,0,0,0,1,1,1],
-    [0,0,1,1,0,0,0,1,1,0,0],
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,0,0,0,0,1,1],
-    [0,0,1,1,0,0,0,1,1,0,0],
-    [0,0,0,0,0,1,0,0,0,1,1],
-    [0,0,0,0,0,1,0,0,0,1,1],
-]
 let data = [
     [1,0,1,0,1,0,1], //     
     [0,0,0,1,0,0,0], //     
@@ -206,6 +166,7 @@ let diaTest = [
 ]
 
 
-// TEST 
-const qc = new QuotaCalculator();
-qc.doEverything(M2, 0.47);
+//const qc = new QuotaCalculator();
+//qc.doEverything(M2, 0.47);
+
+

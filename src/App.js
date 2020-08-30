@@ -7,23 +7,15 @@ import Header from "./components/Header";
 
 export const Wrapper = styled.div`
   font-family: system-ui;
+  background-color: #F4F4F4;
+  margin: 10px;
 `;
 
 function App() {
   return (
     <Wrapper>
       <Header />
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <CreateGrid />
-          </Route>
-
-          <Route exact path="/evaluate">
-            <EvaluateGrid />
-          </Route>
-        </Switch>
-      </Router>
+      <CreateGrid></CreateGrid>
     </Wrapper>
   );
 }
