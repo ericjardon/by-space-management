@@ -1,14 +1,13 @@
 /* Esta clase realiza las 
 funciones del backend relacionadas con el cálculo de disponibilidad.
  */
-// TEST DATA
-
 
 class QuotaCalculator{
 
     doEverything(data,quota){       // data is a bidimensional array. Quota is a value between 0 and 1
         // Cuenta mesas totales
         const totalTables = this.countTables(data);
+        console.log("Total tables: " + totalTables);
 
         // Crear la Susana Dis
         this.disableTablesX(data);
@@ -18,16 +17,21 @@ class QuotaCalculator{
 
         // Cuenta mesas disponibles
         const available = this.countTables(data);
+        console.log("available Tables for use: " + available);
 
         // Calcular porcentaje con SD
         const distancePC = this.calculatePC(available, totalTables);
+        console.log("Capacity with Safe Distancing " + distancePC);
 
         // If Quota is lower than PC after safe distance, disable more tables
         if(quota < distancePC) {
+            console.log("Quota not achieved.")
             const extraTables = available - Math.round(totalTables*quota);
             console.log("extraTables: " +extraTables);
             // Recalcular disponibilidad según Quota
-           this.disableFurther(data, extraTables);
+            this.disableFurther(data, extraTables);
+        } else{
+            console.log("Quota achieved!");
         }
 
         return data;
@@ -111,12 +115,12 @@ class QuotaCalculator{
     }
 
     calculatePC(available, total){
-        return available/total *100;
+        return available/total;
     }
 
     disableFurther(data, extraTables){
             // Simply turn as many ones to -1 as there are extraTables
-            for (row of data){
+            for (var row of data){
                 for (var i=0; i<row.length; i++){
                     if (row[i] === 1 && extraTables>0) {
                         row[i] = -1;
@@ -132,18 +136,8 @@ class QuotaCalculator{
     }
 }
         
-        /*readCols(data){
-            let i; 
-            let j;
-             
-            for (j=0; j<data[0].length; j++){        // recorre por columnas a la derecha
-                let col =[];
-                for (i=0; i<data.length;i++){
-                    col.push(data[i][j]);
-                }
-                console.log("Column: " + col);
-            }
-        }*/
+
+
  
 let M1 = [     
     [0,0,0,0,0,1,0,0,0,1,1],
@@ -214,5 +208,4 @@ let diaTest = [
 
 // TEST 
 const qc = new QuotaCalculator();
-qc.doEverything(M2, 0.5);
-
+qc.doEverything(M2, 0.47);
