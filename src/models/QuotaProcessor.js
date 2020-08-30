@@ -25,8 +25,7 @@ class QuotaCalculator{
 
     // Primero selecciona las mesas que sí estan a sana distancia
     // lee de arriba a abajo, izquierda a derecha
-    disableTables(data){
-
+    disableTablesX(data){
         let row;
         for (row of data){
             for (var i=0; i<row.length-2; i++){
@@ -40,25 +39,47 @@ class QuotaCalculator{
                 }
             }
         }
-
-
-
-
+    
+        disableTablesY(data){
+            let i; 
+            let j;
+             
+            for (j=0; j<data[0].length; j++){        // recorre por columnas a la derecha
+                let column=[];
+                for (i=0; i<data.length-2;i++){  // recorre filas hacia abajo
+                    column.push(data[i][j]);
+                    if (data[i][j] === 1){
+                            if(data[i][j+1] === 0){     // checar adyacente abajo
+                                if(data[i][j+2] !== 0){
+                                    data[i][j]=-1;
+                                }
+                            }
+                        }
+                }
+                console.log(""+ j + " " + column);
+            }
+        }
 } 
 
 let data = [
-    [1,0,1,0,0,0,1], //
+    [1,0,1,0,0,0,1], //     
     [0,0,0,1,0,0,0],
     [1,1,1,0,0,0,0],
     [1,0,1,1,0,1,0]
 ]
+
 let test = [
-    [1,0,1,0],        // debería quedar igual
-    [0,1,0,0],         // debería quedar igual
-    [1,0,1,1]         // debería quedar -101 *igual?  
+    [1,1,0,1,1],        // debería quedar
+    [1,1,0,1,0],         // debería quedar 
+    [1,1,0,1,1],
+    [1,1,1,1,0],
+    [1,0,1,1,0]
 ]
+
 
 const qc = new QuotaCalculator();
 //console.log(qc.countTables(data));
-qc.disableTables(test);
-console.log(test);
+//qc.disableTablesX(test);
+qc.disableTablesX(test);
+
+console.log("\n", test);

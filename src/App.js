@@ -3,8 +3,7 @@ import React from 'react';
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 import {Header,HeaderItem, HeaderInput, LoginB,Title,HeaderWrapper } from './components/Header'
 import CreateGrid from './components/CreateGrid'
-import SideComponent from './components/SideComponent'
-import SideComponentsCalculated from './components/SideComponentsCalculated'
+import EvaluateGrid from './components/EvaluateGrid'
 import styled from "styled-components";
 
 const Layout= styled.div`
@@ -29,9 +28,20 @@ function App() {
     </Header>
 
 
-     <SideComponent/>
-    <SideComponentsCalculated/>
+    
+    
+    
+    
+  
+    
+    
+    
     <CreateGrid/>
+    
+
+    
+  
+    
     
 
     

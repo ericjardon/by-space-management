@@ -11,31 +11,31 @@ margin: auto;
 
 const Top = styled.div `
 display: flex;
-
+justify-content: center;
 
 `
 const Row = styled.div`
 display: flex;
 text-align: center;
 height: 100px;
+justify-content: center;
+border: 0px solid black;
+margin: 1px;
 
-border: 1px solid black;
-margin: 25px;
 `;
 
 const Cell =styled.div`
-border: 2px solid black;
-margin: auto;
-height: 50px;
-width: 50px;
+border: 1px solid black;
+margin: 1px;
+height: 100px;
+width: 100px;
 
 
 `;
 const Table =styled.div`
-
-margin: auto;
-height: 50px;
-width: 50px;
+margin: 1px;
+height: 100px;
+width: 100px;
 background-color: #ad7657;
 
 `;
@@ -57,6 +57,11 @@ export const Input = styled.input`
    margin: 25px;
 `;
 
+const Bottom = styled.div `
+display: flex;
+justify-content: center;
+
+`
 
 
 
@@ -131,7 +136,7 @@ createTable(row,column) {
             <Layout>
 
             <Top>
-               <h1>Create a layout</h1>
+              
                 <Input onChange={(e) => this.onChange(e, "rows")} placeholder="Rows"></Input>
                 <Input onChange={(e) => this.onChange(e, "columns")} placeholder="Columns"></Input>
                 <Button onClick={this.createCells}>Create Grid</Button>
@@ -159,6 +164,7 @@ createTable(row,column) {
             
             )}
             </div>
+            <Bottom><Button>Save layout</Button></Bottom>
 
             </Layout>
 
