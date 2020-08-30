@@ -94,6 +94,7 @@ class CreateGrid extends Component {
       numberOfTables:10,
       currentCapacity:100,
       secondTimer:false,
+      thirdTimer:false,
     };
     this.updateCapacity = React.createRef()
     this.onChange = this.onChange.bind(this);
@@ -151,6 +152,10 @@ console.log(this.state.numberOfTables);
     console.log("current"+ this.state.currentCapacity)
     
 }
+timerTres=()=>{
+  this.setState({thirdTimer:true})
+}
+
 
 
 
@@ -209,10 +214,18 @@ console.log(this.state.numberOfTables);
           <div></div>
         ) : (
           <div>
-            <EvaluateGrid data={this.state.currentCapacity}/>
+            <EvaluateGrid data={this.state.currentCapacity} d={this.state.pops} q={1}/>
+            <Button onClick={this.timerTres}>FJLKD</Button>
           </div>
         )}
         
+        {this.state.thirdTimer === false ? (
+          <div></div>
+        ) : (
+          <div>
+            <Grid gridd={this.state.pops}></Grid>
+          </div>
+        )}
   
        
 
